@@ -37,6 +37,19 @@ header{background:#102c31;border-color:#47615f;gap:14px}
 footer a{margin-left:10px;white-space:nowrap;color:#ebc773;font-weight:700}
 @media(max-width:700px){header{padding:9px 12px}.left{gap:10px}.brand-img{width:35px;height:35px}.brand{font-size:11px}.actions{gap:6px}.detail-facebook{padding:5px 8px}.detail-f{width:17px;height:17px;font-size:15px}}
 
+
+/* STL download is shown only after the public GitHub Release asset is verified. */
+.print-info{display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:12px 22px;padding:13px 18px;background:#163338;border-top:1px solid #436261;border-bottom:1px solid #436261}
+.print-description{display:flex;flex-direction:column;gap:3px}
+.print-description strong{font-size:14px;color:#f0d08a}
+.print-description span{font-size:12px;color:#bed2cd}
+.print-actions{display:flex;align-items:center;flex-wrap:wrap;gap:9px}
+.print-status{font-size:12px;color:#d6bd81}
+.print-download{display:inline-flex;background:#debb67;color:#132e32;font-size:13px;font-weight:750;border-radius:8px;padding:8px 12px;text-decoration:none}
+.print-download:hover{background:#f3d48d;color:#132e32;text-decoration:none}
+.print-download[hidden]{display:none}
+html.embedded .print-info{display:none}
+@media(max-width:650px){.print-info{padding:11px 12px}.print-description strong{font-size:13px}.print-actions{width:100%}}
 </style>
 </head>
 <body>
@@ -44,7 +57,11 @@ footer a{margin-left:10px;white-space:nowrap;color:#ebc773;font-weight:700}
 <div class="actions"><a class="detail-facebook" href="https://www.facebook.com/mapovaarcheologie/" target="_blank" rel="noopener noreferrer" aria-label="Mapová archeologie na Facebooku"><span class="detail-f" aria-hidden="true">f</span>Facebook ↗</a><button id="glb" disabled>Stáhnout GLB</button><button id="html" disabled>Stáhnout offline HTML</button></div></header>
 <div id="stage"><div id="loading"><div><div id="status" role="status">Načítám skutečný 3D model Levý Hradec…</div><progress id="progress" max="24" value="0"></progress><div id="detail">Model se stahuje po menších částech. Může to chvíli trvat podle připojení.</div></div></div>
 <iframe id="viewer" title="Interaktivní 3D model Levý Hradec" allow="fullscreen" allowfullscreen></iframe></div>
-<footer>Podklad: dodaný export LiDAR3D s označením „LiDAR © ČÚZK“. GLB slouží pro 3D zobrazení, tisknutelný uzavřený STL/3MF zatím není připraven. Exportovaný soubor: levy_hradec_3d.html; původ dat dle exportu: LiDAR © ČÚZK. <a href="https://www.facebook.com/mapovaarcheologie/" target="_blank" rel="noopener noreferrer">Facebook ↗</a></footer>
+<section class="print-info" aria-label="Soubor pro 3D tisk">
+ <div class="print-description"><strong>Levý Hradec · model pro 3D tisk (STL)</strong><span>145,4 × 150 × 54,1 modelových jednotek · ZIP 7,75 MB · uzavřený model · před tiskem ověřte měřítko a náhled vrstev</span></div>
+ <div class="print-actions"><span class="print-status" id="print-status" role="status">Zjišťuji dostupnost tiskového modelu…</span><a class="print-download" id="print-download" hidden download>Stáhnout ZIP / STL ↓</a></div>
+</section>
+<footer>Podklad: dodaný export LiDAR3D s označením „LiDAR © ČÚZK“. GLB slouží pro 3D zobrazení, model STL byl připraven, jeho veřejné stažení se zpřístupní po nahrání ZIPu do GitHub Releases. Exportovaný soubor: levy_hradec_3d.html; původ dat dle exportu: LiDAR © ČÚZK. <a href="https://www.facebook.com/mapovaarcheologie/" target="_blank" rel="noopener noreferrer">Facebook ↗</a></footer>
 <script>
 const files=["/assets/levy-hradec/part-00.txt","/assets/levy-hradec/part-01.txt","/assets/levy-hradec/part-02.txt","/assets/levy-hradec/part-03.txt","/assets/levy-hradec/part-04.txt","/assets/levy-hradec/part-05.txt","/assets/levy-hradec/part-06.txt","/assets/levy-hradec/part-07.txt","/assets/levy-hradec/part-08.txt","/assets/levy-hradec/part-09.txt","/assets/levy-hradec/part-10.txt","/assets/levy-hradec/part-11.txt","/assets/levy-hradec/part-12.txt","/assets/levy-hradec/part-13.txt","/assets/levy-hradec/part-14.txt","/assets/levy-hradec/part-15.txt","/assets/levy-hradec/part-16.txt","/assets/levy-hradec/part-17.txt","/assets/levy-hradec/part-18.txt","/assets/levy-hradec/part-19.txt","/assets/levy-hradec/part-20.txt","/assets/levy-hradec/part-21.txt","/assets/levy-hradec/part-22.txt","/assets/levy-hradec/part-23.txt"];
 const frame=document.getElementById('viewer');
@@ -94,6 +111,29 @@ async function start(){
   }catch(e){status.textContent='Model se nepodařilo načíst';detail.textContent=String(e);console.error(e)}
 }
 start();
+async function checkPrintFile() {
+ const label=document.getElementById('print-status');
+ const button=document.getElementById('print-download');
+ if(!label || !button) return;
+ button.hidden=true;
+ try {
+   const response=await fetch('https://api.github.com/repos/ZemanAnt/mapova-archeologie/releases/tags/modely-v1',{
+     headers:{'Accept':'application/vnd.github+json'}
+   });
+   if(response.status===404) { label.textContent='Soubor STL čeká na zveřejnění.'; return; }
+   if(!response.ok) throw new Error('GitHub API: HTTP '+response.status);
+   const release=await response.json();
+   const asset=Array.isArray(release.assets)&&release.assets.find(x=>x.name==='levy_hradec_tisk_pro_web.zip'&&x.state==='uploaded'&&x.browser_download_url);
+   if(!asset) { label.textContent='Vydání existuje, soubor STL ještě nebyl nahrán.'; return; }
+   button.href=asset.browser_download_url;
+   button.hidden=false;
+   label.textContent='Tiskový model STL je dostupný ke stažení.';
+ } catch(e) {
+   label.textContent='Dostupnost ZIPu se nepodařilo ověřit.';
+   console.warn('STL release check:',e);
+ }
+}
+checkPrintFile();
 window.addEventListener('pagehide',()=>{if(pageURL)URL.revokeObjectURL(pageURL)});
 </script>
 </body></html>
