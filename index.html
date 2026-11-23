@@ -162,6 +162,23 @@ footer{padding:34px 0 28px;background:#091b20;border-top:1px solid #47646170}
 @media(max-width:600px){html{scroll-padding-top:148px}.header{align-items:center}.brand-logo{width:46px;height:46px}.brand{font-size:13px}.brand-copy small{font-size:8px;letter-spacing:.1em}header nav{gap:9px 17px;font-size:12px}.nav-social{padding:5px 9px}.hero-grid{padding-top:36px;padding-bottom:48px;gap:28px}.hero h1{font-size:clamp(40px,11vw,56px)}.hero-display{min-height:345px;padding:17px}.hero-logo-shell{width:min(60%,205px)}.hero-display-bottom strong{font-size:21px}.hero-benefits{margin-top:24px;gap:8px 15px}.statline{gap:14px 20px}.statline span{flex-wrap:wrap}.statline b{font-size:16px}section{padding-top:48px;padding-bottom:48px}.site-art{height:195px}.footer-main{gap:22px}.footer-connect{align-items:flex-start;gap:12px}.foot{gap:10px}}
 @media(prefers-reduced-motion:reduce){.hero-logo-shell{transition:none}}
 
+  
+/* Archival imagery: proportional crops, captions, accessible source listing */
+.site-art{height:185px}
+.site-art img{object-position:50% 52%}
+.site-art .photo-label{left:12px;right:auto;top:auto;bottom:12px;background:rgba(10,28,31,.82);border-color:rgba(255,240,200,.35);color:#f4e8ce;font-size:9px;letter-spacing:.06em}
+.site-art span:not(.photo-label){right:12px}
+.site-credit{color:#c8b58b!important;font-size:11px!important;margin-top:2px!important}
+.image-credits{margin-top:22px;padding:15px 19px;border:1px solid #49615a;border-radius:13px;background:#10282b;color:#cad6d0;font-size:12px;line-height:1.65}
+.image-credits summary{cursor:pointer;font-weight:750;color:#edd0a0;list-style-position:inside}
+.image-credits summary:hover{color:#ffe4b5}
+.credit-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:7px 23px;padding-top:17px}
+.credit-grid p{margin:0 0 9px;font-size:12px;color:#b5cac2}
+.credit-grid strong{color:#e4ebdf}
+.credit-grid a{color:#edd0a0;text-decoration:underline;text-underline-offset:3px}
+.credit-grid a:hover{color:white}
+@media(max-width:700px){.credit-grid{grid-template-columns:1fr}.image-credits{padding:12px 15px}}
+
   </style>
   </head>
 <body>
@@ -194,29 +211,38 @@ footer{padding:34px 0 28px;background:#091b20;border-top:1px solid #47646170}
       <p class="notice"><strong>Odborné upozornění:</strong> Zobrazen je originální 3D export dodaný pro lokalitu Kouřim, nikoli syntetický terén. Export obsahuje označení „LiDAR © ČÚZK“; přesnou georeferenci, úplnost odborných metadat a publikační podmínky je nutné dále ověřit.</p>
     </section>
     <section id="lokality" class="wrap">
-      <div class="sectionheading"><h2>Katalog hradišť</h2><p>Čtyři interaktivní 3D modely z dodaných podkladů. U tří lokalit jsou náhledy vytvořené z dat modelu; Závist se připravuje.</p></div>
+      <div class="sectionheading"><h2>Katalog hradišť</h2><p>Čtyři dostupné interaktivní 3D modely a připravované oppidum Závist. Katalog doplňují skutečné fotografie lokalit; u Mařína zatím ponecháváme modelový reliéf.</p></div>
       <div class="cards">
         <a class="site-card site-link" href="/lokality/divoka-sarka.html" aria-label="Otevřít 3D model Divoké Šárky">
-          <div class="site-art"><img src="/assets/thumbnails/divoka-sarka.svg" alt="Stínovaný reliéf Divoké Šárky z dodaného 3D modelu" loading="lazy" decoding="async" width="512" height="252"><span>INTERAKTIVNÍ 3D</span></div>
-          <div class="site-body"><h3>Divoká Šárka</h3><p>Praha · LiDAR reliéf, měření, výškové profily</p><p class="openmodel">Otevřít 3D model ↗</p></div>
+          <div class="site-art"><img src="https://thumb.wikimedia.org/wikipedia/commons/thumb/9/99/Sk%C3%A1ly_a_hradi%C5%A1t%C4%9B_v_Divok%C3%A9_%C5%A0%C3%A1rce.jpg/960px-Sk%C3%A1ly_a_hradi%C5%A1t%C4%9B_v_Divok%C3%A9_%C5%A0%C3%A1rce.jpg" alt="Skály a plošina hradiště v Divoké Šárce, fotografie Elišky Jindříškové" loading="lazy" decoding="async" width="960" height="720" onerror="this.onerror=null;this.src='/assets/thumbnails/divoka-sarka.svg'"><span>INTERAKTIVNÍ 3D</span><span class="photo-label">FOTOGRAFIE LOKALITY</span></div>
+          <div class="site-body"><h3>Divoká Šárka</h3><p>Praha · LiDAR reliéf, měření, výškové profily</p><p class="site-credit">Foto: Eliška Jindříšková · CC BY-SA 4.0</p><p class="openmodel">Otevřít 3D model ↗</p></div>
         </a>
         <a class="site-card site-link" href="/lokality/stara-kourim.html" aria-label="Otevřít 3D model hradiště Stará Kouřim">
-          <div class="site-art placeholder" role="img" aria-label="Ilustrační grafický náhled; skutečný 3D model se otevře po kliknutí"><span>INTERAKTIVNÍ 3D</span></div>
-          <div class="site-body"><h3>Hradiště Stará Kouřim</h3><p>Kouřim · 3D LiDAR reliéf, měření, profily</p><p class="openmodel">Otevřít 3D model ↗</p></div>
+          <div class="site-art"><img src="https://thumb.wikimedia.org/wikipedia/commons/thumb/2/23/Star%C3%A1_Kou%C5%99im%2C_Libu%C5%A1ino_jez%C3%ADrko.jpg/960px-Star%C3%A1_Kou%C5%99im%2C_Libu%C5%A1ino_jez%C3%ADrko.jpg" alt="Libušino jezírko na lokalitě hradiště Stará Kouřim, fotografie ŠJů" loading="lazy" decoding="async" width="960" height="720" onerror="this.onerror=null;this.src='/assets/thumbnails/levy-hradec.svg'"><span>INTERAKTIVNÍ 3D</span><span class="photo-label">FOTOGRAFIE LOKALITY</span></div>
+          <div class="site-body"><h3>Hradiště Stará Kouřim</h3><p>Kouřim · 3D LiDAR reliéf, měření, profily</p><p class="site-credit">Foto: ŠJů · CC BY-SA 3.0</p><p class="openmodel">Otevřít 3D model ↗</p></div>
         </a>
         <article class="site-card">
-          <div class="site-art placeholder" role="img" aria-label="Grafický zástupný motiv pro Závist, skutečný terénní model zatím chybí"><span>V PŘÍPRAVĚ</span></div>
-          <div class="site-body"><h3>Oppidum Závist</h3><p>Dolní Břežany · krajinný kontext a 3D reliéf</p><p class="disclaimer">Náhled je prozatím pouze grafický motiv.</p></div>
+          <div class="site-art"><img src="https://thumb.wikimedia.org/wikipedia/commons/thumb/5/55/Keltsk%C3%A9_oppidum_Z%C3%A1vist.jpg/960px-Keltsk%C3%A9_oppidum_Z%C3%A1vist.jpg" alt="Pohled přes Vltavu na návrší keltského oppida Závist, fotografie Dolní Břežany" loading="lazy" decoding="async" width="960" height="640" onerror="this.onerror=null;this.style.display='none';this.parentElement.classList.add('placeholder')"><span>V PŘÍPRAVĚ</span><span class="photo-label">FOTOGRAFIE LOKALITY</span></div>
+          <div class="site-body"><h3>Oppidum Závist</h3><p>Dolní Břežany · krajinný kontext a 3D reliéf</p><p class="site-credit">Foto: Dolní Břežany · CC BY-SA 4.0</p><p class="disclaimer">Fotografie zachycuje skutečnou lokalitu, 3D model se připravuje.</p></div>
         </article>
         <a class="site-card site-link" href="/lokality/marin.html" aria-label="Otevřít 3D model lokality Mařín">
           <div class="site-art"><img src="/assets/thumbnails/marin.svg" alt="Stínovaný reliéf z dodaného souboru Oblast přiřazeného k Mařínu" loading="lazy" decoding="async" width="512" height="252"><span>INTERAKTIVNÍ 3D</span></div>
-          <div class="site-body"><h3>Mařín</h3><p>Svitavsko · 3D reliéf, měření, výškové profily</p><p class="disclaimer">Přiložený export je označen „Oblast“; přiřazení k Mařínu je pracovní.</p><p class="openmodel">Otevřít 3D model ↗</p></div>
+          <div class="site-body"><h3>Mařín</h3><p>Svitavsko · 3D reliéf, měření, výškové profily</p><p class="site-credit">Náhled: vizualizace reliéfu z dodaného 3D exportu</p><p class="disclaimer">Přiložený export je označen „Oblast“; přiřazení k Mařínu je pracovní.</p><p class="openmodel">Otevřít 3D model ↗</p></div>
         </a>
         <a class="site-card site-link" href="/lokality/levy-hradec.html" aria-label="Otevřít 3D model Levého Hradce">
-          <div class="site-art"><img src="/assets/thumbnails/levy-hradec.svg" alt="Stínovaný reliéf Levého Hradce z dodaného 3D modelu" loading="lazy" decoding="async" width="512" height="252"><span>INTERAKTIVNÍ 3D</span></div>
-          <div class="site-body"><h3>Levý Hradec</h3><p>Žalov u Roztok · raně středověké hradiště a LiDAR reliéf</p><p class="openmodel">Otevřít 3D model ↗</p></div>
+          <div class="site-art"><img src="https://thumb.wikimedia.org/wikipedia/commons/thumb/4/4a/Kostel_sv._Klimenta%2C_Lev%C3%BD_Hradec.jpg/960px-Kostel_sv._Klimenta%2C_Lev%C3%BD_Hradec.jpg" alt="Kostel svatého Klimenta v areálu hradiště Levý Hradec, fotografie Ondřeje Žváčka" loading="lazy" decoding="async" width="960" height="629" onerror="this.onerror=null;this.src='/assets/thumbnails/levy-hradec.svg'"><span>INTERAKTIVNÍ 3D</span><span class="photo-label">FOTOGRAFIE LOKALITY</span></div>
+          <div class="site-body"><h3>Levý Hradec</h3><p>Žalov u Roztok · raně středověké hradiště a LiDAR reliéf</p><p class="site-credit">Foto: Ondřej Žváček · CC BY-SA 4.0</p><p class="openmodel">Otevřít 3D model ↗</p></div>
         </a>
       </div>
+      <details class="image-credits"><summary>Autoři fotografií, licence a zdroje <span aria-hidden="true">↗</span></summary>
+        <div class="credit-grid">
+          <p><strong>Divoká Šárka</strong> · <a href="https://commons.wikimedia.org/wiki/File:Sk%C3%A1ly_a_hradi%C5%A1t%C4%9B_v_Divok%C3%A9_%C5%A0%C3%A1rce.jpg" target="_blank" rel="noopener noreferrer">Eliška Jindříšková / Wikimedia Commons</a> · <a href="https://creativecommons.org/licenses/by-sa/4.0/" target="_blank" rel="noopener noreferrer">CC BY-SA 4.0</a>. Výřez fotografie pro náhled pomocí CSS.</p>
+          <p><strong>Stará Kouřim</strong> · <a href="https://commons.wikimedia.org/wiki/File:Star%C3%A1_Kou%C5%99im,_Libu%C5%A1ino_jez%C3%ADrko.jpg" target="_blank" rel="noopener noreferrer">ŠJů / Wikimedia Commons</a> · <a href="https://creativecommons.org/licenses/by-sa/3.0/" target="_blank" rel="noopener noreferrer">CC BY-SA 3.0</a>. Výřez fotografie pro náhled pomocí CSS.</p>
+          <p><strong>Oppidum Závist</strong> · <a href="https://commons.wikimedia.org/wiki/File:Keltsk%C3%A9_oppidum_Z%C3%A1vist.jpg" target="_blank" rel="noopener noreferrer">Dolní Břežany / Wikimedia Commons</a> · <a href="https://creativecommons.org/licenses/by-sa/4.0/" target="_blank" rel="noopener noreferrer">CC BY-SA 4.0</a>. Výřez fotografie pro náhled pomocí CSS.</p>
+          <p><strong>Levý Hradec</strong> · <a href="https://commons.wikimedia.org/wiki/File:Kostel_sv._Klimenta,_Lev%C3%BD_Hradec.jpg" target="_blank" rel="noopener noreferrer">Ondřej Žváček / Wikimedia Commons</a> · <a href="https://creativecommons.org/licenses/by-sa/4.0/" target="_blank" rel="noopener noreferrer">CC BY-SA 4.0</a>. Výřez fotografie pro náhled pomocí CSS.</p>
+          <p><strong>Mařín</strong> · stávající modelový náhled (bez převzaté fotografie). Nalezené snímky hradiště dosud nemají ověřené oprávnění k publikování. Přiřazení původního exportu k Mařínu zůstává pracovní.</p>
+        </div>
+      </details>
     </section>
     <section id="projekt" class="wrap"><div class="about">
       <div><p class="eyebrow">O projektu</p><h2>Archeologie, kterou můžete prozkoumat.</h2><p>Mapová archeologie propojuje terénní modely, odborné podklady a srozumitelné články. Každá budoucí karta lokality by měla jasně oddělit naměřené údaje, interpretace a hypotetické rekonstrukce.</p><p>Veřejně stahovatelné modely pro 3D tisk budou doplněny jako samostatné, k tisku připravené soubory STL nebo 3MF.</p></div>
