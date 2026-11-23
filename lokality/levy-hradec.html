@@ -47,7 +47,9 @@ footer a{margin-left:10px;white-space:nowrap;color:#ebc773;font-weight:700}
 .print-status{font-size:12px;color:#d6bd81}
 .print-download{display:inline-flex;background:#debb67;color:#132e32;font-size:13px;font-weight:750;border-radius:8px;padding:8px 12px;text-decoration:none}
 .print-download:hover{background:#f3d48d;color:#132e32;text-decoration:none}
-.print-download[hidden]{display:none}
+.print-download:disabled{opacity:.55;cursor:wait}
+.print-download:not(:disabled){cursor:pointer}
+.print-download:focus-visible{outline:3px solid #ffdc86;outline-offset:3px}
 html.embedded .print-info{display:none}
 @media(max-width:650px){.print-info{padding:11px 12px}.print-description strong{font-size:13px}.print-actions{width:100%}}
 </style>
@@ -59,9 +61,9 @@ html.embedded .print-info{display:none}
 <iframe id="viewer" title="Interaktivní 3D model Levý Hradec" allow="fullscreen" allowfullscreen></iframe></div>
 <section class="print-info" aria-label="Soubor pro 3D tisk">
  <div class="print-description"><strong>Levý Hradec · model pro 3D tisk (STL)</strong><span>145,4 × 150 × 54,1 modelových jednotek · ZIP 7,75 MB · uzavřený model · před tiskem ověřte měřítko a náhled vrstev</span></div>
- <div class="print-actions"><span class="print-status" id="print-status" role="status">Zjišťuji dostupnost tiskového modelu…</span><a class="print-download" id="print-download" hidden download>Stáhnout ZIP / STL ↓</a></div>
+ <div class="print-actions"><span class="print-status" id="print-status" role="status" aria-live="polite">Ověřuji tiskový archiv…</span><button class="print-download" id="print-download" type="button" disabled>Stáhnout ZIP / STL (7,75 MB) ↓</button></div>
 </section>
-<footer>Podklad: dodaný export LiDAR3D s označením „LiDAR © ČÚZK“. GLB slouží pro 3D zobrazení, model STL byl připraven, jeho veřejné stažení se zpřístupní po nahrání ZIPu do GitHub Releases. Exportovaný soubor: levy_hradec_3d.html; původ dat dle exportu: LiDAR © ČÚZK. <a href="https://www.facebook.com/mapovaarcheologie/" target="_blank" rel="noopener noreferrer">Facebook ↗</a></footer>
+<footer>Podklad: dodaný export LiDAR3D s označením „LiDAR © ČÚZK“. GLB slouží pro 3D zobrazení, uzavřený tiskový model STL je dostupný jako archiv ZIP. Archiv je na webu uložen po částech, při stažení se automaticky spojí a ověří pomocí SHA-256. Před použitím ověřte měřítko a licenci zdrojových dat. Exportovaný soubor: levy_hradec_3d.html; původ dat dle exportu: LiDAR © ČÚZK. <a href="https://www.facebook.com/mapovaarcheologie/" target="_blank" rel="noopener noreferrer">Facebook ↗</a></footer>
 <script>
 const files=["/assets/levy-hradec/part-00.txt","/assets/levy-hradec/part-01.txt","/assets/levy-hradec/part-02.txt","/assets/levy-hradec/part-03.txt","/assets/levy-hradec/part-04.txt","/assets/levy-hradec/part-05.txt","/assets/levy-hradec/part-06.txt","/assets/levy-hradec/part-07.txt","/assets/levy-hradec/part-08.txt","/assets/levy-hradec/part-09.txt","/assets/levy-hradec/part-10.txt","/assets/levy-hradec/part-11.txt","/assets/levy-hradec/part-12.txt","/assets/levy-hradec/part-13.txt","/assets/levy-hradec/part-14.txt","/assets/levy-hradec/part-15.txt","/assets/levy-hradec/part-16.txt","/assets/levy-hradec/part-17.txt","/assets/levy-hradec/part-18.txt","/assets/levy-hradec/part-19.txt","/assets/levy-hradec/part-20.txt","/assets/levy-hradec/part-21.txt","/assets/levy-hradec/part-22.txt","/assets/levy-hradec/part-23.txt"];
 const frame=document.getElementById('viewer');
@@ -111,28 +113,67 @@ async function start(){
   }catch(e){status.textContent='Model se nepodařilo načíst';detail.textContent=String(e);console.error(e)}
 }
 start();
-async function checkPrintFile() {
- const label=document.getElementById('print-status');
- const button=document.getElementById('print-download');
- if(!label || !button) return;
- button.hidden=true;
- try {
-   const response=await fetch('https://api.github.com/repos/ZemanAnt/mapova-archeologie/releases/tags/modely-v1',{
-     headers:{'Accept':'application/vnd.github+json'}
-   });
-   if(response.status===404) { label.textContent='Soubor STL čeká na zveřejnění.'; return; }
-   if(!response.ok) throw new Error('GitHub API: HTTP '+response.status);
-   const release=await response.json();
-   const asset=Array.isArray(release.assets)&&release.assets.find(x=>x.name==='levy_hradec_tisk_pro_web.zip'&&x.state==='uploaded'&&x.browser_download_url);
-   if(!asset) { label.textContent='Vydání existuje, soubor STL ještě nebyl nahrán.'; return; }
-   button.href=asset.browser_download_url;
-   button.hidden=false;
-   label.textContent='Tiskový model STL je dostupný ke stažení.';
- } catch(e) {
-   label.textContent='Dostupnost ZIPu se nepodařilo ověřit.';
-   console.warn('STL release check:',e);
+const printStatus=document.getElementById('print-status');
+const printButton=document.getElementById('print-download');
+let verifiedPrintManifest=null;
+const printBase='/assets/downloads/levy-hradec/';
+async function checkPrintFile(){
+ try{
+  const response=await fetch(printBase+'manifest.json',{cache:'no-cache'});
+  if(!response.ok)throw new Error('Manifest HTTP '+response.status);
+  const manifest=await response.json();
+  if(!Array.isArray(manifest.parts)||manifest.parts.length!==11||!manifest.parts.every(p=>/^part-\\d{2}\\.bin$/.test(p))||manifest.bytes!==7753985||!/^[a-f0-9]{64}$/.test(manifest.sha256))throw new Error('Neplatný manifest');
+  verifiedPrintManifest=manifest;
+  printButton.disabled=false;
+  printStatus.textContent='Tiskový model je připraven ke stažení.';
+ }catch(e){
+  printButton.disabled=true;
+  printStatus.textContent='Tiskový model zatím není dostupný.';
+  console.warn('STL manifest:',e);
  }
 }
+async function downloadPrintFile(){
+ if(!verifiedPrintManifest || printButton.disabled)return;
+ printButton.disabled=true;
+ const initialText=printButton.textContent;
+ printButton.textContent='Připravuji ZIP…';
+ try{
+  const m=verifiedPrintManifest;
+  const binaries=new Array(m.parts.length);
+  let complete=0;
+  for(let i=0;i<m.parts.length;i+=4){
+   await Promise.all(m.parts.slice(i,i+4).map(async(name,j)=>{
+    const response=await fetch(printBase+name);
+    if(!response.ok)throw new Error('Chybí část archivu '+name+' (HTTP '+response.status+')');
+    binaries[i+j]=await response.arrayBuffer();
+    printStatus.textContent='Načítám archiv: '+(++complete)+' / '+m.parts.length+' částí';
+   }));
+  }
+  const archive=new Blob(binaries,{type:'application/zip'});
+  if(archive.size!==m.bytes)throw new Error('Nesouhlasí velikost archivu');
+  if(!globalThis.crypto || !crypto.subtle)throw new Error('Prohlížeč nepodporuje kontrolu integrity SHA-256');
+  printStatus.textContent='Ověřuji neporušenost ZIPu…';
+  const digest=await crypto.subtle.digest('SHA-256',await archive.arrayBuffer());
+  const checksum=Array.from(new Uint8Array(digest),b=>b.toString(16).padStart(2,'0')).join('');
+  if(checksum!==m.sha256)throw new Error('Kontrolní součet SHA-256 nesouhlasí');
+  const url=URL.createObjectURL(archive);
+  const link=document.createElement('a');
+  link.href=url;
+  link.download=m.filename;
+  document.body.appendChild(link);
+  link.click();
+  link.remove();
+  setTimeout(()=>URL.revokeObjectURL(url),30000);
+  printStatus.textContent='Archiv ověřen. Stažení bylo zahájeno.';
+ }catch(e){
+  printStatus.textContent='Soubor se nepodařilo stáhnout: '+e.message;
+  console.error('STL download:',e);
+ }finally{
+  printButton.disabled=false;
+  printButton.textContent=initialText;
+ }
+}
+printButton.addEventListener('click',downloadPrintFile);
 checkPrintFile();
 window.addEventListener('pagehide',()=>{if(pageURL)URL.revokeObjectURL(pageURL)});
 </script>

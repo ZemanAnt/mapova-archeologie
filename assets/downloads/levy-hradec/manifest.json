@@ -1,0 +1,22 @@
+{
+  "name": "Levý Hradec — 3D tisk",
+  "filename": "levy_hradec_tisk_pro_web.zip",
+  "mime": "application/zip",
+  "bytes": 7753985,
+  "sha256": "a20909b68f2688912bf6d61e46a4cb73aa457bedb2a627d877d876256440f14c",
+  "parts": [
+    "part-00.bin",
+    "part-01.bin",
+    "part-02.bin",
+    "part-03.bin",
+    "part-04.bin",
+    "part-05.bin",
+    "part-06.bin",
+    "part-07.bin",
+    "part-08.bin",
+    "part-09.bin",
+    "part-10.bin"
+  ],
+  "payload": "levy_hradec_tisk.stl",
+  "description": "Original STL plus INFO_TISK.txt; binary ZIP split into parts to stay within connector limits. Browser downloads and joins parts into original unchanged ZIP after SHA-256 verification."
+}
