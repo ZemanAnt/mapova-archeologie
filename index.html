@@ -52,15 +52,24 @@
     #upload { display:none }
     #viewer-status { flex:1;min-width:200px;color:var(--muted);font-size:12px }
     .notice { color:#c8d1c7;font-size:13px;padding:12px 3px 0;max-width:950px }
-    .cards { display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:18px }
-    .site-card { overflow:hidden;background:var(--panel);border:1px solid var(--line);border-radius:17px }
-    .site-art { position:relative;height:145px;overflow:hidden;background:radial-gradient(ellipse at 45% 100%,#516d54 0 13%,#334e46 13% 27%,#213e3d 27% 45%,#173133 45% 65%,#102729 65%); }
-    .site-art:after { content:"";position:absolute;inset:0;background:repeating-radial-gradient(ellipse at 50% 90%,transparent 0 12px,#dfc18f24 13px 14px,transparent 15px 24px);transform:scale(1.4) rotate(-8deg) }
-    .site-art span { position:absolute;right:15px;top:13px;z-index:1;border:1px solid #ffffff46;border-radius:20px;padding:3px 10px;background:#112524aa;font-size:11px }
-    .site-body { padding:20px }
-    .site-body h3 { margin:0 0 8px;font:700 23px/1.2 Georgia,serif }
-    .site-body p { color:var(--muted);font-size:13px;margin-bottom:0 }
-    .about { display:grid;grid-template-columns:1.1fr .9fr;gap:32px;background:#19302d;border:1px solid var(--line);border-radius:22px;padding:34px }
+    .cards { display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:18px;align-items:stretch }
+    .site-card { display:flex;flex-direction:column;overflow:hidden;min-width:0;background:var(--panel);border:1px solid var(--line);border-radius:17px;transition:transform .2s ease,border-color .2s ease,box-shadow .2s ease }
+    .site-link:hover { transform:translateY(-4px);border-color:#a38a5e;box-shadow:0 18px 38px #0004 }
+    .site-link:focus-visible { outline:3px solid var(--gold);outline-offset:3px }
+    .site-art { position:relative;height:174px;overflow:hidden;background:#273d39 }
+    .site-art img { display:block;width:100%;height:100%;object-fit:cover;transition:transform .35s ease,filter .3s ease;filter:contrast(1.1) saturate(.86) }
+    .site-link:hover .site-art img { transform:scale(1.075);filter:contrast(1.12) saturate(1.05) }
+    .site-art::after { content:"";pointer-events:none;position:absolute;z-index:1;inset:45% 0 0;background:linear-gradient(transparent,#0d252680) }
+    .site-art span { position:absolute;top:13px;right:13px;z-index:2;border:1px solid #ffe6b288;border-radius:25px;padding:4px 10px;color:#ffebc9;background:#142b2be0;font-size:10px;font-weight:750;letter-spacing:.045em;white-space:nowrap }
+    .site-art.placeholder { background:radial-gradient(ellipse at 35% 75%,#53685d 0 15%,transparent 40%),linear-gradient(135deg,#2b4846,#192e34 60%,#122629) }
+    .site-art.placeholder::before { content:"";position:absolute;inset:-65%;transform:rotate(-14deg);background:repeating-radial-gradient(ellipse at 45% 54%,transparent 0 13px,#d9d3a52e 14px 15px,transparent 16px 28px) }
+    .site-card .site-body { padding:19px 20px 20px;display:flex;flex-direction:column;flex:1;gap:8px }
+    .site-body h3 { margin:0;font:700 24px/1.2 Georgia,serif }
+    .site-body p { margin:0;color:var(--muted);font-size:13px;line-height:1.48 }
+    .site-body .openmodel { color:var(--gold);font-weight:750;margin-top:auto;padding-top:8px }
+    .site-body .disclaimer { font-size:11px;color:#adbcaf }
+    @media (prefers-reduced-motion:reduce) { .site-card,.site-art img { transition:none } }
+        .about { display:grid;grid-template-columns:1.1fr .9fr;gap:32px;background:#19302d;border:1px solid var(--line);border-radius:22px;padding:34px }
     .about p { color:var(--muted) }
     .steps { display:grid;gap:14px }
     .step { display:flex;align-items:flex-start;gap:14px;font-size:14px }
@@ -105,12 +114,24 @@
       <p class="notice"><strong>Odborné upozornění:</strong> Zobrazený ukázkový terén je syntetický a nepředstavuje skutečná měření ani vědeckou rekonstrukci hradiště. Skutečné modely s původem dat a zdroji budou doplněny postupně.</p>
     </section>
     <section id="lokality" class="wrap">
-      <div class="sectionheading"><h2>Katalog hradišť</h2><p>První dvě lokality mají interaktivní 3D modely z dodaných LiDAR exportů. Další lokality postupně doplníme.</p></div>
+      <div class="sectionheading"><h2>Katalog hradišť</h2><p>Tři interaktivní LiDAR 3D modely z dodaných podkladů. Náhledy reliéfu jsou vytvořené přímo z dat jednotlivých modelů. Závist je zatím v přípravě.</p></div>
       <div class="cards">
-        <a class="site-card site-link" href="/lokality/divoka-sarka.html" aria-label="Otevřít 3D model Divoké Šárky"><div class="site-art"><span>3D MODEL</span></div><div class="site-body"><h3>Divoká Šárka</h3><p>Praha · LiDAR reliéf, měření, výškové profily</p><p class="openmodel">Otevřít interaktivní model ↗</p></div></a>
-        <article class="site-card"><div class="site-art"><span>V PŘÍPRAVĚ</span></div><div class="site-body"><h3>Oppidum Závist</h3><p>Dolní Břežany · krajinný kontext a 3D reliéf</p></div></article>
-        <a class="site-card site-link" href="/lokality/marin.html" aria-label="Otevřít 3D model hradiště Mařín"><div class="site-art"><span>3D MODEL</span></div><div class="site-body"><h3>Mařín</h3><p>Svitavsko · LiDAR reliéf, měření, výškové profily</p><p class="openmodel">Otevřít interaktivní model ↗</p></div></a>
-        <article class="site-card"><div class="site-art"><span>V PŘÍPRAVĚ</span></div><div class="site-body"><h3>Levý Hradec</h3><p>Žalov · archeologické doklady a 3D prezentace</p></div></article>
+        <a class="site-card site-link" href="/lokality/divoka-sarka.html" aria-label="Otevřít 3D model Divoké Šárky">
+          <div class="site-art"><img src="/assets/thumbnails/divoka-sarka.svg" alt="Stínovaný reliéf Divoké Šárky z dodaného 3D modelu" loading="lazy" decoding="async" width="512" height="252"><span>INTERAKTIVNÍ 3D</span></div>
+          <div class="site-body"><h3>Divoká Šárka</h3><p>Praha · LiDAR reliéf, měření, výškové profily</p><p class="openmodel">Otevřít 3D model ↗</p></div>
+        </a>
+        <article class="site-card">
+          <div class="site-art placeholder" role="img" aria-label="Grafický zástupný motiv pro Závist, skutečný terénní model zatím chybí"><span>V PŘÍPRAVĚ</span></div>
+          <div class="site-body"><h3>Oppidum Závist</h3><p>Dolní Břežany · krajinný kontext a 3D reliéf</p><p class="disclaimer">Náhled je prozatím pouze grafický motiv.</p></div>
+        </article>
+        <a class="site-card site-link" href="/lokality/marin.html" aria-label="Otevřít 3D model lokality Mařín">
+          <div class="site-art"><img src="/assets/thumbnails/marin.svg" alt="Stínovaný reliéf z dodaného souboru Oblast přiřazeného k Mařínu" loading="lazy" decoding="async" width="512" height="252"><span>INTERAKTIVNÍ 3D</span></div>
+          <div class="site-body"><h3>Mařín</h3><p>Svitavsko · 3D reliéf, měření, výškové profily</p><p class="disclaimer">Přiložený export je označen „Oblast“; přiřazení k Mařínu je pracovní.</p><p class="openmodel">Otevřít 3D model ↗</p></div>
+        </a>
+        <a class="site-card site-link" href="/lokality/levy-hradec.html" aria-label="Otevřít 3D model Levého Hradce">
+          <div class="site-art"><img src="/assets/thumbnails/levy-hradec.svg" alt="Stínovaný reliéf Levého Hradce z dodaného 3D modelu" loading="lazy" decoding="async" width="512" height="252"><span>INTERAKTIVNÍ 3D</span></div>
+          <div class="site-body"><h3>Levý Hradec</h3><p>Žalov u Roztok · raně středověké hradiště a LiDAR reliéf</p><p class="openmodel">Otevřít 3D model ↗</p></div>
+        </a>
       </div>
     </section>
     <section id="projekt" class="wrap"><div class="about">
