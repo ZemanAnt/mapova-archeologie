@@ -1,18 +1,34 @@
 # Mapová archeologie – 3D atlas českých hradišť
 
-Web publikovaný pomocí Cloudflare Pages z větve `main`.
+Web pro Cloudflare Pages, automatické publikování z větve `main` repozitáře `ZemanAnt/mapova-archeologie`.
 
-## Aktivní modely
-- [Divoká Šárka](lokality/divoka-sarka.html) – skutečný vložený 3D reliéf, původní rozšířený prohlížeč a měřicí nástroje.
-- [Mařín](lokality/marin.html) – 3D reliéf z uživatelem dodaného exportu `oblast_3d.html`, lokalita přiřazena podle zadání.
+## Katalog hradišť
 
-Modely jsou bezeztrátově uložené po menších UTF-8 blocích v `assets/<slug>/part-NN.txt`. Stránky je v prohlížeči spojí do originálního autonomního HTML a vykreslí v iframe. Z výsledku lze stáhnout zdrojový model GLB a offline HTML.
+| Lokalita | Stav | Vstup |
+|---|---|---|
+| Divoká Šárka | 3D LiDAR model | [Prohlížeč](lokality/divoka-sarka.html) |
+| Mařín | 3D model z exportu `oblast_3d.html` – **pracovní přiřazení lokality** | [Prohlížeč](lokality/marin.html) |
+| Levý Hradec | 3D LiDAR model | [Prohlížeč](lokality/levy-hradec.html) |
+| Oppidum Závist | Připravuje se | Karta v katalogu |
 
-Zdrojová data jsou dodaná uživatelem. Původní prohlížeče uvádějí „LiDAR © ČÚZK“. Odborná metadata, licenční režim a tisknutelné uzavřené modely STL/3MF vyžadují samostatnou kontrolu.
+U tří dostupných lokalit používá katalog náhledy skutečného reliéfu odvozené z dat přiložených GLB modelů: `assets/thumbnails/*.svg`. Závist má zatím jen jasně označený dekorativní motiv.
+
+## Princip publikování
+
+Původní autonomní 3D HTML exporty jsou velké (přibližně 17–19 MB). Z důvodu snadnější správy jsou uložené po částech v `assets/<lokalita>/part-NN.txt`. Stránky příslušných lokalit tyto soubory stáhnou, spojí a vykreslí v iframe. V prohlížeči lze stáhnout původní HTML a GLB. Měřicí funkce pocházejí z dodaných exportů.
+
+- Divoká Šárka: `divoka_sarka_3d.html`
+- Mařín: `oblast_3d.html` (interní název „Oblast“, přiřazení k Mařínu není samotným souborem prokázáno)
+- Levý Hradec: `levy_hradec_3d(1).html`
+
+Zdrojové exporty uvádějí „LiDAR © ČÚZK“. Odborná metadata, licence a tisknutelné uzavřené modely STL/3MF je potřeba řešit samostatně. Web nenabízí dosud neexistující tiskové soubory.
 
 ## Cloudflare Pages
+
 - Repository: `ZemanAnt/mapova-archeologie`
 - Production branch: `main`
-- Framework preset: None
+- Framework preset: `None`
 - Build command: `exit 0`
 - Build output directory: kořen repozitáře
+
+Každý commit na `main` spustí nové nasazení v Cloudflare Pages, pokud je GitHub propojen s projektem.
