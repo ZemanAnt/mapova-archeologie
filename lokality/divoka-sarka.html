@@ -2,7 +2,7 @@
 <html lang="cs">
 <head>
 <meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
-<meta name="theme-color" content="#101a1c">
+<meta name="theme-color" content="#10353a"><link rel="icon" type="image/svg+xml" href="/assets/logo-lma.svg">
 <meta name="description" content="Interaktivní 3D LiDAR model lokality Divoká Šárka – Mapová archeologie.">
 <title>Divoká Šárka | 3D model | Mapová archeologie</title>
 <style>
@@ -25,14 +25,26 @@ button:hover:not(:disabled){background:#415354}button:disabled{opacity:.5;cursor
 #progress{width:100%;height:7px;accent-color:#d6ad6d;margin:15px 0}
 footer{flex-shrink:0;background:#111f21;border-top:1px solid #3d4d4c;color:#aab9b7;padding:8px 18px;font-size:12px}
 @media(max-width:650px){header{padding:10px 12px}.left{gap:9px}.brand{font-size:12px}h1{font-size:18px}.meta{font-size:11px}button{padding:6px 9px}footer{padding:7px 12px}}
+
+/* Branding consistent with the LMA atlas homepage */
+header{background:#102c31;border-color:#47615f;gap:14px}
+.left{gap:17px}
+.brand{display:inline-flex;align-items:center;gap:10px;font-size:12px;letter-spacing:.04em;white-space:nowrap}
+.brand-img{width:43px;height:43px;display:block;border-radius:50%;background:#fff;box-shadow:0 0 0 1px #d8b65970}
+.detail-facebook{display:inline-flex;align-items:center;gap:7px;color:#f0d08a;border:1px solid #b2915975;border-radius:8px;padding:7px 10px;font-size:12px;font-weight:700;white-space:nowrap}
+.detail-facebook:hover{background:#2d4949;text-decoration:none}
+.detail-f{display:inline-grid;place-items:center;width:20px;height:20px;border-radius:5px;background:#ddb959;color:#143039;font:bold 17px Arial,sans-serif;padding-top:2px}
+footer a{margin-left:10px;white-space:nowrap;color:#ebc773;font-weight:700}
+@media(max-width:700px){header{padding:9px 12px}.left{gap:10px}.brand-img{width:35px;height:35px}.brand{font-size:11px}.actions{gap:6px}.detail-facebook{padding:5px 8px}.detail-f{width:17px;height:17px;font-size:15px}}
+
 </style>
 </head>
 <body>
-<header><div class="left"><a class="brand" href="/">← MAPOVÁ ARCHEOLOGIE</a><div><h1>Divoká Šárka</h1><div class="meta">Praha · 3D LiDAR model · záběr podkladu 1,1 × 1,1 km</div></div></div>
-<div class="actions"><button id="glb" disabled>Stáhnout GLB</button><button id="html" disabled>Stáhnout offline HTML</button></div></header>
+<header><div class="left"><a class="brand" href="/" aria-label="Zpět do atlasu Mapová archeologie"><img class="brand-img" src="/assets/logo-lma.svg" width="43" height="43" alt=""><span>← MAPOVÁ ARCHEOLOGIE</span></a><div><h1>Divoká Šárka</h1><div class="meta">Praha · 3D LiDAR model · záběr podkladu 1,1 × 1,1 km</div></div></div>
+<div class="actions"><a class="detail-facebook" href="https://www.facebook.com/mapovaarcheologie/" target="_blank" rel="noopener noreferrer" aria-label="Mapová archeologie na Facebooku"><span class="detail-f" aria-hidden="true">f</span>Facebook ↗</a><button id="glb" disabled>Stáhnout GLB</button><button id="html" disabled>Stáhnout offline HTML</button></div></header>
 <div id="stage"><div id="loading"><div><div id="status" role="status">Načítám skutečný 3D model Divoká Šárka…</div><progress id="progress" max="10" value="0"></progress><div id="detail">Model se stahuje po menších částech. Může to chvíli trvat podle připojení.</div></div></div>
 <iframe id="viewer" title="Interaktivní 3D model Divoká Šárka" allow="fullscreen" allowfullscreen></iframe></div>
-<footer>Podklad: dodaný export LiDAR3D s označením „LiDAR © ČÚZK“. GLB slouží pro 3D zobrazení, tisknutelný uzavřený STL/3MF zatím není připraven. Exportovaný soubor: divoka_sarka_3d.html.</footer>
+<footer>Podklad: dodaný export LiDAR3D s označením „LiDAR © ČÚZK“. GLB slouží pro 3D zobrazení, tisknutelný uzavřený STL/3MF zatím není připraven. Exportovaný soubor: divoka_sarka_3d.html. <a href="https://www.facebook.com/mapovaarcheologie/" target="_blank" rel="noopener noreferrer">Facebook ↗</a></footer>
 <script>
 const files=["/assets/divoka-sarka/part-00.txt","/assets/divoka-sarka/part-01.txt","/assets/divoka-sarka/part-02.txt","/assets/divoka-sarka/part-03.txt","/assets/divoka-sarka/part-04.txt","/assets/divoka-sarka/part-05.txt","/assets/divoka-sarka/part-06.txt","/assets/divoka-sarka/part-07.txt","/assets/divoka-sarka/part-08.txt","/assets/divoka-sarka/part-09.txt"];
 const frame=document.getElementById('viewer');
