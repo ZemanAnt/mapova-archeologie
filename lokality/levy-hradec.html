@@ -122,7 +122,7 @@ async function checkPrintFile(){
   const response=await fetch(printBase+'manifest.json',{cache:'no-cache'});
   if(!response.ok)throw new Error('Manifest HTTP '+response.status);
   const manifest=await response.json();
-  if(!Array.isArray(manifest.parts)||manifest.parts.length!==11||!manifest.parts.every(p=>/^part-\\d{2}\\.bin$/.test(p))||manifest.bytes!==7753985||!/^[a-f0-9]{64}$/.test(manifest.sha256))throw new Error('Neplatný manifest');
+  if(!Array.isArray(manifest.parts)||manifest.parts.length!==11||!manifest.parts.every(p=>/^part-\d{2}\.bin$/.test(p))||manifest.bytes!==7753985||!/^[a-f0-9]{64}$/.test(manifest.sha256))throw new Error('Neplatný manifest');
   verifiedPrintManifest=manifest;
   printButton.disabled=false;
   printStatus.textContent='Tiskový model je připraven ke stažení.';
