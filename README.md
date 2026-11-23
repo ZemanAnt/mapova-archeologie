@@ -7,17 +7,19 @@ Web pro Cloudflare Pages, automatické publikování z větve `main` repozitář
 | Lokalita | Stav | Vstup |
 |---|---|---|
 | Divoká Šárka | 3D LiDAR model | [Prohlížeč](lokality/divoka-sarka.html) |
+| Stará Kouřim | 3D LiDAR model z `kourim_3d.html` | [Prohlížeč](lokality/stara-kourim.html) |
 | Mařín | 3D model z exportu `oblast_3d.html` – **pracovní přiřazení lokality** | [Prohlížeč](lokality/marin.html) |
 | Levý Hradec | 3D LiDAR model | [Prohlížeč](lokality/levy-hradec.html) |
 | Oppidum Závist | Připravuje se | Karta v katalogu |
 
-U tří dostupných lokalit používá katalog náhledy skutečného reliéfu odvozené z dat přiložených GLB modelů: `assets/thumbnails/*.svg`. Závist má zatím jen jasně označený dekorativní motiv.
+U tří lokalit používá katalog náhledy skutečného reliéfu odvozené z dat přiložených GLB modelů: `assets/thumbnails/*.svg`. Stará Kouřim má zatím označený grafický náhled; skutečný model je v prohlížeči. Závist má zatím jen jasně označený dekorativní motiv.
 
 ## Princip publikování
 
 Původní autonomní 3D HTML exporty jsou velké (přibližně 17–19 MB). Z důvodu snadnější správy jsou uložené po částech v `assets/<lokalita>/part-NN.txt`. Stránky příslušných lokalit tyto soubory stáhnou, spojí a vykreslí v iframe. V prohlížeči lze stáhnout původní HTML a GLB. Měřicí funkce pocházejí z dodaných exportů.
 
 - Divoká Šárka: `divoka_sarka_3d.html`
+- Stará Kouřim: `kourim_3d.html` (vložený skutečný export, použit také jako výchozí demo na hlavní straně)
 - Mařín: `oblast_3d.html` (interní název „Oblast“, přiřazení k Mařínu není samotným souborem prokázáno)
 - Levý Hradec: `levy_hradec_3d(1).html`
 

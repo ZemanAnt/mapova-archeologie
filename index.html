@@ -44,6 +44,7 @@
     .viewer-top small { display:block;color:var(--muted);font-size:12px;margin-top:2px }
     .tag { align-self:center;padding:5px 11px;border:1px solid #9e875c;border-radius:30px;color:var(--gold);font-size:12px;font-weight:650 }
     #viewer { height:min(58vw,510px);min-height:320px;position:relative;background:radial-gradient(ellipse at 50% 35%,#36504b,#142626 70%) }
+    #viewer iframe { display:block;width:100%;height:100%;border:0;background:#10151c }
     #viewer canvas { display:block;width:100%;height:100%;touch-action:none }
     .viewer-overlay { position:absolute;pointer-events:none;left:20px;bottom:17px;color:#e1e6dc;font-size:12px;background:#0a1819b8;border:1px solid #ffffff22;border-radius:9px;padding:6px 10px }
     .viewer-tools { padding:17px 21px;display:flex;align-items:center;gap:9px;flex-wrap:wrap;border-top:1px solid var(--line) }
@@ -81,10 +82,7 @@
     @media(prefers-reduced-motion:reduce) { html { scroll-behavior:auto } * { transition:none!important } }
     .site-link { display:block; color:inherit; transition:transform .15s, border-color .15s } .site-link:hover {transform:translateY(-4px);border-color:#c9a56d} .openmodel {margin:12px 0 0!important; color:#edc485!important; font-weight:700} 
   </style>
-  <script type="importmap">
-  {"imports":{"three":"https://cdn.jsdelivr.net/npm/three@0.180.0/build/three.module.js","three/addons/":"https://cdn.jsdelivr.net/npm/three@0.180.0/examples/jsm/"}}
-  </script>
-</head>
+  </head>
 <body>
   <header><div class="wrap header">
     <a class="brand" href="#uvod"><span class="brandmark" aria-hidden="true">⌁</span><span>MAPOVÁ ARCHEOLOGIE</span></a>
@@ -97,28 +95,26 @@
       <p class="intro">Vznikající veřejný atlas českých hradišť. Zkoumejte reliéf, objevujte stopy dávného osídlení a v budoucnu si vybrané modely stáhněte pro 3D tisk.</p>
       <div class="actions"><a class="btn" href="#prohlizec">Prozkoumat 3D ukázku ↗</a><a class="btn secondary" href="#lokality">Připravované lokality</a></div>
     </div>
-    <div class="wrap statline"><span><b>2 modely</b> Divoká Šárka a Mařín</span><span><b>GLB</b> pro webové zobrazení</span><span><b>STL / 3MF</b> připravované podklady pro tisk</span><span><b>Otevřený</b> badatelský projekt</span></div>
+    <div class="wrap statline"><span><b>4 modely</b> Šárka, Kouřim, Mařín a Levý Hradec</span><span><b>GLB</b> pro webové zobrazení</span><span><b>STL / 3MF</b> připravované podklady pro tisk</span><span><b>Otevřený</b> badatelský projekt</span></div>
     <section id="prohlizec" class="wrap">
-      <div class="sectionheading"><h2>3D prohlížeč</h2><p>Otáčejte terénem myší nebo prstem, přibližujte kolečkem a vyzkoušejte načíst vlastní model ve formátu GLB.</p></div>
+      <div class="sectionheading"><h2>3D prohlížeč – Hradiště Stará Kouřim</h2><p>Prozkoumejte skutečný 3D reliéf Staré Kouřimi. Otáčejte modelem myší nebo prstem, měřte vzdálenosti, vytvářejte výškové profily a podle potřeby načtěte vlastní GLB.</p></div>
       <div class="viewer-shell">
-        <div class="viewer-top"><div><strong id="model-title">Ukázkový model reliéfu</strong><small id="model-subtitle">Ilustrační terén vytvořený pro demonstraci prohlížeče</small></div><span class="tag">INTERAKTIVNÍ 3D</span></div>
-        <div id="viewer" role="img" aria-label="Interaktivní trojrozměrný reliéf. Otočení tažením, přiblížení kolečkem myši."><div class="viewer-overlay">Tažením otáčet · kolečkem přiblížit</div></div>
-        <div class="viewer-tools">
-          <label for="upload" class="tool" style="cursor:pointer">↥ Načíst vlastní GLB</label><input id="upload" type="file" accept=".glb,model/gltf-binary">
-          <button id="reset" type="button" class="tool">↺ Základní pohled</button>
-          <button id="wire" type="button" class="tool">▦ Drátový model</button>
-          <button id="demo" type="button" class="tool">◈ Vrátit ukázku</button>
-          <span id="viewer-status" role="status">Načtení GLB je pouze místní náhled v tomto prohlížeči.</span>
-        </div>
+        <div class="viewer-top"><div><strong>Hradiště Stará Kouřim</strong><small>3D LiDAR model z dodaného souboru kourim_3d.html</small></div><span class="tag">INTERAKTIVNÍ 3D</span></div>
+        <div id="viewer"><iframe src="/lokality/stara-kourim.html?embed=1" title="Interaktivní 3D LiDAR prohlížeč hradiště Stará Kouřim" loading="eager" allow="fullscreen" allowfullscreen></iframe></div>
+        <div class="viewer-tools"><a class="tool" href="/lokality/stara-kourim.html">⤢ Otevřít velký 3D prohlížeč</a><span id="viewer-status" role="status">Model může chvíli načítat; obsahuje původní nástroje pro měření, profil a práci s GLB.</span></div>
       </div>
-      <p class="notice"><strong>Odborné upozornění:</strong> Zobrazený ukázkový terén je syntetický a nepředstavuje skutečná měření ani vědeckou rekonstrukci hradiště. Skutečné modely s původem dat a zdroji budou doplněny postupně.</p>
+      <p class="notice"><strong>Odborné upozornění:</strong> Zobrazen je originální 3D export dodaný pro lokalitu Kouřim, nikoli syntetický terén. Export obsahuje označení „LiDAR © ČÚZK“; přesnou georeferenci, úplnost odborných metadat a publikační podmínky je nutné dále ověřit.</p>
     </section>
     <section id="lokality" class="wrap">
-      <div class="sectionheading"><h2>Katalog hradišť</h2><p>Tři interaktivní LiDAR 3D modely z dodaných podkladů. Náhledy reliéfu jsou vytvořené přímo z dat jednotlivých modelů. Závist je zatím v přípravě.</p></div>
+      <div class="sectionheading"><h2>Katalog hradišť</h2><p>Čtyři interaktivní 3D modely z dodaných podkladů. U tří lokalit jsou náhledy vytvořené z dat modelu; Závist se připravuje.</p></div>
       <div class="cards">
         <a class="site-card site-link" href="/lokality/divoka-sarka.html" aria-label="Otevřít 3D model Divoké Šárky">
           <div class="site-art"><img src="/assets/thumbnails/divoka-sarka.svg" alt="Stínovaný reliéf Divoké Šárky z dodaného 3D modelu" loading="lazy" decoding="async" width="512" height="252"><span>INTERAKTIVNÍ 3D</span></div>
           <div class="site-body"><h3>Divoká Šárka</h3><p>Praha · LiDAR reliéf, měření, výškové profily</p><p class="openmodel">Otevřít 3D model ↗</p></div>
+        </a>
+        <a class="site-card site-link" href="/lokality/stara-kourim.html" aria-label="Otevřít 3D model hradiště Stará Kouřim">
+          <div class="site-art placeholder" role="img" aria-label="Ilustrační grafický náhled; skutečný 3D model se otevře po kliknutí"><span>INTERAKTIVNÍ 3D</span></div>
+          <div class="site-body"><h3>Hradiště Stará Kouřim</h3><p>Kouřim · 3D LiDAR reliéf, měření, profily</p><p class="openmodel">Otevřít 3D model ↗</p></div>
         </a>
         <article class="site-card">
           <div class="site-art placeholder" role="img" aria-label="Grafický zástupný motiv pro Závist, skutečný terénní model zatím chybí"><span>V PŘÍPRAVĚ</span></div>
@@ -140,81 +136,5 @@
     </div></section>
   </main>
   <footer><div class="wrap foot"><span>© 2026 Mapová archeologie · První veřejná pracovní verze</span><span>Bez registrace · Respektujeme původ archeologických dat</span></div></footer>
-  <script type="module">
-    import * as THREE from 'three';
-    import { OrbitControls } from 'three/addons/controls/OrbitControls.js';
-    import { GLTFLoader } from 'three/addons/loaders/GLTFLoader.js';
-    const host=document.getElementById('viewer');
-    const status=document.getElementById('viewer-status');
-    const title=document.getElementById('model-title');
-    const subtitle=document.getElementById('model-subtitle');
-    const scene=new THREE.Scene();
-    scene.background=new THREE.Color(0x142626);
-    scene.fog=new THREE.Fog(0x142626,18,36);
-    const camera=new THREE.PerspectiveCamera(45,1,.02,500);
-    const renderer=new THREE.WebGLRenderer({antialias:true});
-    renderer.setPixelRatio(Math.min(window.devicePixelRatio||1,2));
-    renderer.outputColorSpace=THREE.SRGBColorSpace;
-    host.prepend(renderer.domElement);
-    const controls=new OrbitControls(camera,renderer.domElement);
-    controls.enableDamping=true;controls.dampingFactor=.07;
-    controls.maxPolarAngle=Math.PI*.49;
-    scene.add(new THREE.AmbientLight(0xe4e7d2,1.8));
-    const sunlight=new THREE.DirectionalLight(0xffe7bc,2.4);sunlight.position.set(-6,13,8);scene.add(sunlight);
-    const group=new THREE.Group();scene.add(group);
-    const plane=new THREE.PlaneGeometry(12,11,150,140);plane.rotateX(-Math.PI/2);
-    const pos=plane.attributes.position;
-    const colors=[];
-    const low=new THREE.Color(0x3e5f54),high=new THREE.Color(0xb0a779);
-    for(let i=0;i<pos.count;i++){
-      const x=pos.getX(i),z=pos.getZ(i);
-      const r=Math.hypot(x/1.25,z);
-      const hill=.68*Math.exp(-r*r/8)+.60*Math.exp(-Math.pow((r-2.15)/.19,2))+.24*Math.exp(-Math.pow((r-3.16)/.27,2));
-      const texture=.12*Math.sin(x*.9)*Math.cos(z*1.1)+.045*Math.sin(2.6*x+z*1.6);
-      const y=.1+hill+texture;
-      pos.setY(i,y);
-      const c=low.clone().lerp(high,Math.min(1,Math.max(0,(y-.05)/1.32)));
-      colors.push(c.r,c.g,c.b);
-    }
-    plane.setAttribute('color',new THREE.Float32BufferAttribute(colors,3));
-    plane.computeVertexNormals();
-    const landmat=new THREE.MeshStandardMaterial({vertexColors:true,roughness:1,side:THREE.DoubleSide});
-    const terrain=new THREE.Mesh(plane,landmat);group.add(terrain);
-    const base=new THREE.Mesh(new THREE.BoxGeometry(12,.45,11),new THREE.MeshStandardMaterial({color:0x263e3a,roughness:1}));
-    base.position.y=-.22;group.add(base);
-    let imported=null;let currentURL=null;
-    function defaultView(){
-      const box=new THREE.Box3().setFromObject(imported||group);
-      const size=box.getSize(new THREE.Vector3());
-      const center=box.getCenter(new THREE.Vector3());
-      const radius=Math.max(size.x,size.y,size.z,1);
-      controls.target.copy(center);
-      camera.position.copy(center).add(new THREE.Vector3(radius*.85,radius*.65,radius*.96));
-      camera.near=Math.max(.01,radius/1000);camera.far=Math.max(200,radius*100);camera.updateProjectionMatrix();controls.update();
-    }
-    function size(){const w=host.clientWidth,h=host.clientHeight;camera.aspect=w/h;camera.updateProjectionMatrix();renderer.setSize(w,h,false)}
-    new ResizeObserver(size).observe(host);size();defaultView();
-    function animate(){requestAnimationFrame(animate);controls.update();renderer.render(scene,camera)}animate();
-    document.getElementById('reset').addEventListener('click',defaultView);
-    document.getElementById('wire').addEventListener('click',()=>{landmat.wireframe=!landmat.wireframe;status.textContent=imported?'Drátové zobrazení se vztahuje pouze na ukázkový terén.':'Režim drátového modelu: '+(landmat.wireframe?'zapnuto':'vypnuto');});
-    document.getElementById('demo').addEventListener('click',()=>{
-      if(imported){scene.remove(imported);imported=null}
-      if(currentURL){URL.revokeObjectURL(currentURL);currentURL=null}
-      group.visible=true;title.textContent='Ukázkový model reliéfu';subtitle.textContent='Ilustrační terén vytvořený pro demonstraci prohlížeče';status.textContent='Načtení GLB je pouze místní náhled v tomto prohlížeči.';defaultView();
-    });
-    document.getElementById('upload').addEventListener('change',e=>{
-      const f=e.target.files?.[0];if(!f)return;
-      if(!f.name.toLowerCase().endsWith('.glb')){status.textContent='Podporován je formát GLB.';return}
-      status.textContent='Načítám místní soubor '+f.name+'…';
-      const nextURL=URL.createObjectURL(f);
-      new GLTFLoader().load(nextURL,gltf=>{
-        if(imported)scene.remove(imported);
-        if(currentURL)URL.revokeObjectURL(currentURL);
-        imported=gltf.scene;currentURL=nextURL;scene.add(imported);group.visible=false;
-        title.textContent=f.name;subtitle.textContent='Místní náhled – soubor nebyl nahrán na server';
-        status.textContent='GLB načten. Pro veřejné zveřejnění je potřeba soubor přidat do projektu.';defaultView();
-      },undefined,()=>{URL.revokeObjectURL(nextURL);status.textContent='Model se nepodařilo otevřít. Ověř, že jde o platný soubor GLB.';});
-    });
-  </script>
-</body>
+  </body>
 </html>
