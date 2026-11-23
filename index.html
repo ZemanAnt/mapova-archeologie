@@ -70,6 +70,7 @@
     @media(max-width:900px) { .cards { grid-template-columns:repeat(2,minmax(0,1fr)) } .about { grid-template-columns:1fr } }
     @media(max-width:600px) { .wrap { width:calc(100% - 28px) } .hero { padding-top:45px } nav { gap:12px;font-size:12px } .brand span:last-child { max-width:120px;line-height:1.2 } .cards { grid-template-columns:1fr } .viewer-top,.viewer-tools { padding:15px } #viewer { min-height:310px } .about { padding:23px } .statline { gap:13px 24px } }
     @media(prefers-reduced-motion:reduce) { html { scroll-behavior:auto } * { transition:none!important } }
+    .site-link { display:block; color:inherit; transition:transform .15s, border-color .15s } .site-link:hover {transform:translateY(-4px);border-color:#c9a56d} .openmodel {margin:12px 0 0!important; color:#edc485!important; font-weight:700} 
   </style>
   <script type="importmap">
   {"imports":{"three":"https://cdn.jsdelivr.net/npm/three@0.180.0/build/three.module.js","three/addons/":"https://cdn.jsdelivr.net/npm/three@0.180.0/examples/jsm/"}}
@@ -87,7 +88,7 @@
       <p class="intro">Vznikající veřejný atlas českých hradišť. Zkoumejte reliéf, objevujte stopy dávného osídlení a v budoucnu si vybrané modely stáhněte pro 3D tisk.</p>
       <div class="actions"><a class="btn" href="#prohlizec">Prozkoumat 3D ukázku ↗</a><a class="btn secondary" href="#lokality">Připravované lokality</a></div>
     </div>
-    <div class="wrap statline"><span><b>3D</b> interaktivní reliéf</span><span><b>GLB</b> pro webové zobrazení</span><span><b>STL / 3MF</b> připravované podklady pro tisk</span><span><b>Otevřený</b> badatelský projekt</span></div>
+    <div class="wrap statline"><span><b>2 modely</b> Divoká Šárka a Mařín</span><span><b>GLB</b> pro webové zobrazení</span><span><b>STL / 3MF</b> připravované podklady pro tisk</span><span><b>Otevřený</b> badatelský projekt</span></div>
     <section id="prohlizec" class="wrap">
       <div class="sectionheading"><h2>3D prohlížeč</h2><p>Otáčejte terénem myší nebo prstem, přibližujte kolečkem a vyzkoušejte načíst vlastní model ve formátu GLB.</p></div>
       <div class="viewer-shell">
@@ -104,11 +105,11 @@
       <p class="notice"><strong>Odborné upozornění:</strong> Zobrazený ukázkový terén je syntetický a nepředstavuje skutečná měření ani vědeckou rekonstrukci hradiště. Skutečné modely s původem dat a zdroji budou doplněny postupně.</p>
     </section>
     <section id="lokality" class="wrap">
-      <div class="sectionheading"><h2>Hradiště v přípravě</h2><p>První plánované karty. Dokud nebudou zveřejněna podložená 3D data, nebudou zde vydávány demonstrace za skutečné rekonstrukce.</p></div>
+      <div class="sectionheading"><h2>Katalog hradišť</h2><p>První dvě lokality mají interaktivní 3D modely z dodaných LiDAR exportů. Další lokality postupně doplníme.</p></div>
       <div class="cards">
-        <article class="site-card"><div class="site-art"><span>V PŘÍPRAVĚ</span></div><div class="site-body"><h3>Divoká Šárka</h3><p>Praha · terén, valy, historické prameny</p></div></article>
+        <a class="site-card site-link" href="/lokality/divoka-sarka.html" aria-label="Otevřít 3D model Divoké Šárky"><div class="site-art"><span>3D MODEL</span></div><div class="site-body"><h3>Divoká Šárka</h3><p>Praha · LiDAR reliéf, měření, výškové profily</p><p class="openmodel">Otevřít interaktivní model ↗</p></div></a>
         <article class="site-card"><div class="site-art"><span>V PŘÍPRAVĚ</span></div><div class="site-body"><h3>Oppidum Závist</h3><p>Dolní Břežany · krajinný kontext a 3D reliéf</p></div></article>
-        <article class="site-card"><div class="site-art"><span>V PŘÍPRAVĚ</span></div><div class="site-body"><h3>Mařín</h3><p>Svitavsko · terénní model a rešerše</p></div></article>
+        <a class="site-card site-link" href="/lokality/marin.html" aria-label="Otevřít 3D model hradiště Mařín"><div class="site-art"><span>3D MODEL</span></div><div class="site-body"><h3>Mařín</h3><p>Svitavsko · LiDAR reliéf, měření, výškové profily</p><p class="openmodel">Otevřít interaktivní model ↗</p></div></a>
         <article class="site-card"><div class="site-art"><span>V PŘÍPRAVĚ</span></div><div class="site-body"><h3>Levý Hradec</h3><p>Žalov · archeologické doklady a 3D prezentace</p></div></article>
       </div>
     </section>
