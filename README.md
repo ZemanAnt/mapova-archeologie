@@ -23,7 +23,7 @@ Původní autonomní 3D HTML exporty jsou velké (přibližně 17–19 MB). Z d�
 - Mařín: `oblast_3d.html` (interní název „Oblast“, přiřazení k Mařínu není samotným souborem prokázáno)
 - Levý Hradec: `levy_hradec_3d(1).html`
 
-Zdrojové exporty uvádějí „LiDAR © ČÚZK“. Odborná metadata, licence a tisknutelné uzavřené modely STL/3MF je potřeba řešit samostatně. Web nenabízí dosud neexistující tiskové soubory.
+Zdrojové exporty uvádějí „LiDAR © ČÚZK“. Odborná metadata a licenční podmínky je nutné dále ověřovat. Levý Hradec již nabízí samostatný uzavřený STL model pro 3D tisk v archivu ZIP (7 753 985 B), složeném a ověřeném pomocí SHA-256 při stažení. Archiv je uložen po částech v `assets/downloads/levy-hradec/` a popsán souborem `manifest.json`. Další tiskové modely STL/3MF jsou zatím v přípravě.
 
 ## Cloudflare Pages
 
