@@ -12,7 +12,7 @@ Web pro Cloudflare Pages, automatické publikování z větve `main` repozitář
 | Levý Hradec | 3D LiDAR model | [Prohlížeč](lokality/levy-hradec.html) |
 | Oppidum Závist | Připravuje se | Karta v katalogu |
 
-U tří lokalit používá katalog náhledy skutečného reliéfu odvozené z dat přiložených GLB modelů: `assets/thumbnails/*.svg`. Stará Kouřim má zatím označený grafický náhled; skutečný model je v prohlížeči. Závist má zatím jen jasně označený dekorativní motiv.
+Fotografické náhledy katalogu jsou doplněny u Divoké Šárky, Staré Kouřimi, Závisti a Levého Hradce. U Mařína byla doplněna fotografie dřevěné zvonice v osadě (Jiří Komárek, Wikimedia Commons, CC BY-SA 4.0, [zdroj](https://commons.wikimedia.org/wiki/File:Ma%C5%99%C3%ADn_(02).jpg)). **Fotografie Mařína neukazuje samotné hradiště**, nýbrž obec v jeho blízkosti. V případě nedostupnosti vzdálené fotografie se zobrazí původní vizualizace reliéfu `assets/thumbnails/marin.svg`. Přiřazení exportu `oblast_3d.html` k hradišti u Mařína nadále není ověřeno.
 
 ## Princip publikování
 
